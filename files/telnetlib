@@ -1,0 +1,37 @@
+基本原理
+telnetlib 首先通过 socket 连接从网络接收数据，把数据存储到自己的 raw queque 中，
+然后对其进行（telnet 协议相关的）处理（cook）。
+处理结果存放在 cooked queue 中供应用程序取用。整个过程如下图.
+ ---------,      ,----------,      ,-----,      ,--------,      ,-----------,
+  network |=====>|socket buf|=====>|raw-q|=====>|cooked-q|=====>|application|
+ ---------`      `----------`      `-----`      `--------`      `-----------`
+    |               |                 |              |               |
+    |               |                 |              |               |
+    |               |                 |              |---------------|
+    |               |                 |               read_very_lazy |
+    |               |                 |                              |
+    |               |                 |------------------------------|
+    |               |                          read_lazy             |
+    |               |                                                |
+    |               |------------------------------------------------|
+    |                          read_very_eager/read_eager            |
+    |                                                                |
+    |----------------------------------------------------------------|
+    |    read_until/read_all/read_some/expect                        |
+
+各 read 函数的意义
+各种 read 函数的不同就在于它们所包涵的阶段不同。
+read_very_lazy
+只从 cookedq 读取已处理好的数据。
+
+read_lazy
+如果 rawq 有数据，对 raw-q 里的数据进行处理，然后从cookedq 中读取处理好的数据。
+
+read_eager
+从系统的 socket buffer 接受数据（即非阻塞模式 1读取数据）并处理，然后从 cookedq 中读取数据。
+
+read_very_eager
+与 read_eager 类似。不同之处在于 read_eager 只要从
+cookedq 成功读取到数据就返回，而 read_very_eager 会试图读尽可能多的数据。
+其它
+剩下的 read 函数基本上就是阻塞式等待网络数据，直到读到所需数据。
