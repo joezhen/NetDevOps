@@ -2,7 +2,7 @@ import telnetlib,time
 print('--------------telnet登录华为防火墙-----------------')
 USG = {'hostname':'10.1.1.21','username':'admin','password':'Huawei@123'}
 Huawei_tn = telnetlib.Telnet(USG['hostname'])
-Huawei_tn.read_until(b'Username:')
+Huawei_tn.read_until(b'Username:')       #python3中telnetlib模块所有函数返回值变成字节型字符串，前面加b
 Huawei_tn.write(USG['username'].encode('ascii') + b'\n')
 Huawei_tn.read_until(b'Password:')
 Huawei_tn.write(USG['password'].encode('ascii') + b'\n')
