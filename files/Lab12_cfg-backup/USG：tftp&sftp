@@ -1,0 +1,10 @@
+tftp~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+tftp 10.1.1.1 put hda1:/vrpcfg.zip vrpcfg.zip
+#修改Transfer的tftp目录为：/Users/MrJoe/NetDevOps/NetDevOps/files/Lab12_cfg-backup
+
+sftp~~~~~~~~~~~~~~~~~~~~~~
+ssh client first-time enable   #启用SFTP的首次认证功能
+执行命令
+upgrade saved-configuration sftp server-address [ port server-port ] username password [ delay ]
+sftp 10.1.1.1
+put

@@ -1,0 +1,7 @@
+sys
+interface Vlanif 1
+description Python-Group1
+quit
+quit
+sa
+y

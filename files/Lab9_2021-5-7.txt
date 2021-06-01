@@ -1,0 +1,14 @@
+As of 2021-5-7 14:50:14
+
+There are totally 768 ports available in the network.
+0 ports are currently up.
+Port up rate is 0.00%
+***************************************************************
+
+As of 2021-5-7 14:57:21
+
+There are totally 768 ports available in the network.
+16 ports are currently up.
+Port up rate is 2.08%
+***************************************************************
+

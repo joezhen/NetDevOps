@@ -1,0 +1,18 @@
+int e0/0
+ip add 10.1.5.116 255.255.255.0
+exi
+exi
+wr
+
+ssh:
+enable password Huawei@123
+ip domain name Lab8
+aaa new-model
+username python secret Huawei@123
+line vty 0 4
+transport input ssh
+exit
+ip ssh version 2
+ip ssh time-out 120
+ip ssh authentication-retries 3
+crypto key generate rsa

@@ -1,0 +1,2 @@
+update local { av-sdb | cnc | file-reputation | ips-sdb | sa-sdb | location-sdb } file filename
+本地cli升级特征库

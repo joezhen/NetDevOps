@@ -1,0 +1,25 @@
+常用方法
+import xx：导入模块
+class xx：定义类
+def xx: 定义函数
+try-except ：处理可能引发的异常
+net_connect.send_command()             # 向下发送命令，返回输出（基于模式）；
+                                         通常是show/display之类的查询、排错命令或者wr mem这样保存配置的命令
+net_connect.send_command_timing()      # 沿通道发送命令，返回输出（基于时序)
+                                         自己去“猜”什么时候停止运行，
+                                         它的原理是如果没有从设备收到更多新的回显内容后，它会继续等待2秒钟，然后才停止运行.
+                                         send_command_timing()里有一个叫做delay_factor的参数，
+                                         默认为1，如果将它修改为2，则send_command_timing()会等待4秒钟，修改为3，则等待6秒.
+net_connect.send_config_set()          # 将配置命令发送到远程设备，一般配合列表使用
+net_connect.send_config_from_file()    # 发送从文件加载的配置命令,自动添加config terminal和end两个命令
+net_connect.save_config() #            将running#config保存到startup#config
+net_connect.enable()                   # 启进入enable模式
+net_connect.find_prompt()              # 返回当前路由器提示符
+net_connect.commit()                   # 在Juniper和IOS#XR上执行提交操作
+net_connect.disconnect()               # 关闭连接
+net_connect.write_channel()            # 通道的低级写入
+net_connect.read_channel()             # 通道的低级写入
+ssh.disconnect()                       # 关闭连接
+
+
+

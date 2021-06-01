@@ -1,0 +1,7 @@
+scp servcer en
+security-po
+rule name mgt_scp
+source-zon  mgt
+destination-zon local
+destination-address 10.1.1.21 32
+ac p

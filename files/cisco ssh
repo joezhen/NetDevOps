@@ -1,0 +1,32 @@
+~~~~~~~~~~~~~~~~~Cisco Router~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+hostname lab11_cisco_R1
+enable password Huawei@123
+ip domain name Lab5
+aaa new-model
+hostname R1
+aaa new-model
+aaa authentication login default local  /指定用户登录认证方式采用本地数据库认证/
+aaa authorization exec default local    /授权方式采用本地用户数据库进行授权/
+username python privilege 15 secret Huawei@123
+line vty 0 4
+transport input ssh
+exit
+ip ssh version 2
+ip scp server enable
+ip ssh time-out 120
+ip ssh authentication-retries 3
+crypto key generate rsa
+1024
+~~~~~~~~~~~~~~~~~Cisco ASA~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+interface Ethernet0
+ nameif outside
+ security-level 0
+ ip address 10.1.1.60 255.255.255.0
+#
+crypto key generate rsa
+ssh 0.0.0.0 0.0.0.0 outside
+ssh timeout 30
+ssh version 2
+passwd Huawei@123
+username python password Huawei@123
+aaa authentication ssh console LOCAL
